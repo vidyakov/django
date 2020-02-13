@@ -1,21 +1,11 @@
 from django.shortcuts import render
+from .models import ProductCategory, Product, Contacts
 
 
 def main(request):
     content = {
         'title': 'главная',
-        'products': [
-            {
-                'src': '/img/product-1.jpg',
-                'title': 'Отличный стул',
-                'second_title': 'Расположитесь комфортно. '
-            },
-            {
-                'src': '/img/product-2.jpg',
-                'title': 'Стул повышенного качества',
-                'second_title': 'Не оторваться. '
-            }
-        ]
+        'products': Product.objects.all()
     }
     return render(request, 'mainapp/index.html', content)
 
@@ -23,33 +13,15 @@ def main(request):
 def contact(request):
     content = {
         'title': 'контакты',
-        'contacts': [
-            {
-                'city': 'Москва',
-                'phone': '+7-888-888-8888',
-                'email': 'info@geekshop.ru',
-                'address': 'В пределах МКАД'
-            },
-            {
-                'city': 'Москва',
-                'phone': '+7-888-888-8888',
-                'email': 'info@geekshop.ru',
-                'address': 'В пределах МКАД'
-            },
-            {
-                'city': 'Москва',
-                'phone': '+7-888-888-8888',
-                'email': 'info@geekshop.ru',
-                'address': 'В пределах МКАД'
-            },
-        ]
+        'contacts': Contacts.objects.all()
     }
     return render(request, 'mainapp/contact.html', content)
 
 
-def product(request):
+def product(request, pk=None):
     content = {
         'title': 'продукты',
+        # Похожие товары
         'products': [
             {
                 'src': '/img/product-11.jpg',
@@ -67,27 +39,6 @@ def product(request):
                 'second_title': 'Не оторваться.'
             },
         ],
-        'categories': [
-            {
-                'src': 'products_all',
-                'name': 'все'
-            },
-            {
-                'src': 'products_home',
-                'name': 'дом'
-            },
-            {
-                'src': 'products_office',
-                'name': 'офис'
-            },
-            {
-                'src': 'products_modern',
-                'name': 'модерн'
-            },
-            {
-                'src': 'products_classic',
-                'name': 'классика'
-            },
-        ]
+        'categories': ProductCategory.objects.all()
     }
     return render(request, 'mainapp/products.html', content)

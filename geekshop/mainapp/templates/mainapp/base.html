@@ -5,10 +5,16 @@
 <html>
 <head>
     <meta charset="utf-8">
+    {% block js %}
+    {% endblock js%}
+
     {% block title %}
     {% endblock title %}
+
+    {% block css %}
     <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'fonts/font-awesome/css/font-awesome.css' %}">
+    {% endblock css %}
 </head>
 
 <body>
@@ -36,7 +42,7 @@
             </form>
         </div>
     </div>
-    <p class="small">&copy; GB 2017</p>
+    <p class="small">&copy; GB {% now 'Y' %}</p>
     <div class="social">
         <a href="#" class="social1"></a>
         <a href="#" class="social2"></a>
